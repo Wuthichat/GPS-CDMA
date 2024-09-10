@@ -1,4 +1,4 @@
-sv = {
+SV = {
    1: [2,6],
    2: [3,7],
    3: [4,8],
@@ -27,7 +27,7 @@ def generate_G2():
         NewBits = G2[1] ^ G2[2] ^ G2[5] ^ G2[7] ^ G2[8] ^ G2[9]
         G2.insert(0,NewBits)
         G2.pop()
-        OutputBit.append(G2[1]^G2[6]) #PRN --> 1
+        OutputBit.append(G2[SV[2][0]]^G2[SV[2][1]]) #PRN --> N
     return OutputBit
 
 def generate_GoldCode():
@@ -39,4 +39,4 @@ def generate_GoldCode():
     return CA
     
 print(generate_GoldCode())
-
+#print(SV[1][0])
