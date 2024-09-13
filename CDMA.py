@@ -129,4 +129,50 @@ plt.grid(True)
 ax3.set_xticks(np.arange(0, Nbits + 1, 1))  
 
 plt.tight_layout()
+
+'''CMDA Signal plot Data'''
+plt.figure(figsize=(10, 8))
+ax1 = plt.subplot(411)
+ax1.plot(tt, CDMA_signal)
+plt.ylabel('CDMA')
+plt.grid(True)
+ax1.set_xticks(np.arange(0, Nbits + 1, 1)) 
+
+ax2 = plt.subplot(412, sharex=ax1)
+ax2.step(np.arange(len(a1)), a1, where='pre') 
+plt.ylabel('User 1')
+plt.grid(True)
+
+ax3 = plt.subplot(413, sharex=ax1)
+ax3.step(np.arange(len(a2)), a2, where='pre') 
+plt.ylabel('User 2')
+plt.grid(True)
+
+ax4 = plt.subplot(414, sharex=ax1)
+ax4.step(np.arange(len(a3)), a3, where='pre')  
+plt.ylabel('User 3')
+plt.grid(True)
+
+plt.tight_layout()
+
+'''plot XOR'''
+
+plt.figure(figsize=(10, 8))
+
+ax1 = plt.subplot(311)
+ax1.step(np.arange(100), compute_values(a1, gold_code_1)[:100], where='pre')
+plt.ylabel('User 1 XOR')
+plt.grid(True)
+
+ax2 = plt.subplot(312, sharex=ax1)
+ax2.step(np.arange(100), compute_values(a2, gold_code_2)[:100], where='pre')
+plt.ylabel('User 2 XOR')
+plt.grid(True)
+
+ax3 = plt.subplot(313, sharex=ax1)
+ax3.step(np.arange(100), compute_values(a3, gold_code_3)[:100], where='pre') 
+plt.ylabel('User 3 XOR')
+plt.grid(True)
+
+plt.tight_layout()
 plt.show()
