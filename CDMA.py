@@ -1,11 +1,12 @@
+'''main'''
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import math
 
 
-Nbits = 10
-Nsamp = 100
+Nbits = 20
+Nsamp = 10
 M = 2
 f = 2;
 t = np.arange(0, 1, 1/(f*Nsamp))
@@ -27,7 +28,7 @@ SV = {
 def generate_G1():
     OutputBit = []  
     G1 = [1] *10   
-    for i in range(10):
+    for i in range(100):
         NewBits = G1[2] ^ G1[9]  # XOR operation
         G1.insert(0, NewBits)    
         OutputBit.append(G1.pop())  
@@ -36,7 +37,7 @@ def generate_G1():
 def generate_G2(tap):
     OutputBit = []
     G2 = [1]*10
-    for i in range(10):
+    for i in range(100):
         NewBits = G2[1] ^ G2[2] ^ G2[5] ^ G2[7] ^ G2[8] ^ G2[9]
         G2.insert(0, NewBits)
         G2.pop()
@@ -56,9 +57,14 @@ gold_code_2 = generate_GoldCode(2)
 gold_code_3 = generate_GoldCode(3)
 
 # Input sequences
-a1 = np.array([1,0,0,1])
-a2 = np.array([1,1,0,1])
-a3 = np.array([1,0,1,1])
+a1 = np.random.randint(0, 2, Nbits)
+a2 = np.random.randint(0, 2, Nbits)
+a3 = np.random.randint(0, 2, Nbits)
+
+#print("Sequence 1:", a1)
+#print("Sequence 2:", a2)
+#print("Sequence 3:", a3)
+
 
 a1_New = []
 a2_New = []
@@ -94,6 +100,7 @@ x_t3 = modulate_signal(a3_New, cos_t, Nbits, f, Nsamp)
 
 CDMA_signal = np.array(x_t1) + np.array(x_t2) + np.array(x_t3)
 
+#tt = np.arange(0, len(CDMA_signal), 1/(f*Nsamp))
 plt.figure(figsize=(10, 8))
 
 ax1 = plt.subplot(411)
